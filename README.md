@@ -23,3 +23,21 @@ A corporate-style SAP Application Support simulation portal built using Flask.
 - HTML5
 - CSS3
 
+## Application Screenshots
+
+### Login Page
+![Login Page](screenshots/login.png)
+
+### Signup Page
+![Signup Page](screenshots/signup.png)
+
+### User Dashboard
+![User Dashboard](screenshots/user_dashboard.png)
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/admin_dashboard.png)
+![Admin Dashboard](screenshots/admin_dashboard2.png)
+![Admin Dashboard](screenshots/admin_dashboard3.png)
+
+### Raise Ticket Page
+![Raise Ticket](screenshots/raise_ticket.png)
