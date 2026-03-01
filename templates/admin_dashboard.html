@@ -1,0 +1,113 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="navbar">
+    <div class="logo">
+        SAP Support Portal
+    </div>
+
+    <div class="nav-right">
+        <span class="admin-name">Admin Panel</span>
+
+        <a href="/logout">
+            <button class="logout-btn">Logout</button>
+        </a>
+    </div>
+</div>
+
+<div class="container">
+
+    <h2>Admin Dashboard</h2>
+
+    
+    <div class="stats-box">
+        <div class="stat">
+            <h3>Total Tickets</h3>
+            <p>{{ total }}</p>
+        </div>
+
+        <div class="stat">
+            <h3>Open</h3>
+            <p>{{ open_count }}</p>
+        </div>
+
+        <div class="stat">
+            <h3>Resolved</h3>
+            <p>{{ resolved_count }}</p>
+        </div>
+
+        <div class="stat">
+            <h3>High Priority</h3>
+            <p>{{ high_priority }}</p>
+        </div>
+    </div>
+
+    <br>
+
+    
+    {% for ticket in tickets %}
+    <div class="card">
+        <strong>ID:</strong> {{ ticket.id }} <br>
+        <strong>Title:</strong> {{ ticket.title }} <br>
+        <strong>Module:</strong> {{ ticket.module }} <br>
+
+        <strong>Priority:</strong>
+        <span class="{{ ticket.priority|lower }}">
+            {{ ticket.priority }}
+        </span>
+        <br>
+
+        <strong>Status:</strong> {{ ticket.status }} <br>
+        <strong>Created At:</strong> {{ ticket.created_at }} <br>
+
+        {% if ticket.sla %}
+            <strong>SLA (Resolution Time):</strong> {{ ticket.sla }} hours
+        {% endif %}
+
+        {% if ticket.status != "Resolved" %}
+            <br><br>
+            <a href="/resolve/{{ ticket.id }}">
+                <button>Resolve Ticket</button>
+            </a>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <hr>
+
+    
+    <h3>Ticket Analysis Graph</h3>
+    <canvas id="ticketChart"></canvas>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('ticketChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Open', 'Resolved', 'High Priority'],
+            datasets: [{
+                label: 'Ticket Count',
+                data: [{{ open_count }}, {{ resolved_count }}, {{ high_priority }}],
+                backgroundColor: [
+                    'orange',
+                    'green',
+                    'red'
+                ],
+                borderRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+</script>

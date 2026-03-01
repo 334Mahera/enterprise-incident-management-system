@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="container">
+    <div class="card">
+        <h2>Raise Incident</h2>
+
+        <form method="POST">
+            <input type="text" name="title" placeholder="Title" required><br><br>
+
+            <textarea name="description" placeholder="Describe the issue" required></textarea><br><br>
+
+            <select name="module">
+                <option>FI</option>
+                <option>MM</option>
+                <option>SD</option>
+                <option>HR</option>
+            </select><br><br>
+
+            <select name="priority">
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
+            </select><br><br>
+
+            <button type="submit">Submit Ticket</button>
+        </form>
+
+        <br>
+        <a href="/dashboard">Back to Dashboard</a>
+    </div>
+</div>

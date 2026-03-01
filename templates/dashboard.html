@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="navbar">
+    <div class="logo">SAP Support Portal</div>
+    <div class="nav-right">
+        <span class="admin-name">User Panel</span>
+        <a href="/logout">
+            <button class="logout-btn">Logout</button>
+        </a>
+    </div>
+</div>
+
+<div class="container">
+
+<h2>User Dashboard</h2>
+
+<div class="stats-box">
+    <div class="stat">
+        <h3>Total</h3>
+        <p>{{ tickets|length }}</p>
+    </div>
+
+    <div class="stat">
+        <h3>Open</h3>
+        <p>{{ tickets | selectattr("status", "equalto", "Open") | list | length }}</p>
+    </div>
+
+    <div class="stat">
+        <h3>Resolved</h3>
+        <p>{{ tickets | selectattr("status", "equalto", "Resolved") | list | length }}</p>
+    </div>
+</div>
+
+<br>
+
+<a href="/raise">
+    <button>Raise New Ticket</button>
+</a>
+
+<br><br>
+
+{% for ticket in tickets %}
+<div class="card">
+
+    <strong>#{{ ticket["id"] }}</strong> — {{ ticket["title"] }} <br><br>
+
+    <strong>Module:</strong> {{ ticket["module"] }} |
+
+    <strong>Priority:</strong>
+    <span class="{{ ticket['priority']|lower }}">
+        {{ ticket["priority"] }}
+    </span> |
+
+    <strong>Status:</strong>
+    <span class="{{ ticket['status']|lower }}">
+        {{ ticket["status"] }}
+    </span>
+
+    <br>
+    <strong>Created:</strong> {{ ticket["created_at"] }}
+
+</div>
+{% endfor %}
+
+</div>
