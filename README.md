@@ -1,3 +1,6 @@
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Flask](https://img.shields.io/badge/Flask-Web_App-green)
+![Status](https://img.shields.io/badge/Project-Completed-success)
 # Enterprise Incident Management System
 
 A corporate-style SAP Application Support simulation portal built using Flask.
